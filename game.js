@@ -60,7 +60,15 @@ class Game {
 
     play() {
         if (this.moves.length % 2 == 0) {
-            console.log('number of args muust be odd');
+            console.log('number of args must be odd');
+            return;
+        }
+        if (this.moves.length < 1) {
+            console.log('number of args must be > 1');
+            return;
+        }
+        if (this.moves.length != new Set(this.moves).size) {
+            console.log('args must be unique');
             return;
         }
         console.log(`HMAC:${this.hmac}`);
