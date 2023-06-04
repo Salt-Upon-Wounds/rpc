@@ -48,7 +48,7 @@ class Game {
         this.moves = process.argv.slice(2);
         this.key = (new Key()).generateKey();
         this.aiTurn =  Math.floor(Math.random() * this.moves.length);
-        this.hmac = (new Hmac(this.key, this.moves[this.aiTurn])).generateHmac();
+        if (this.moves.length > 0) this.hmac = (new Hmac(this.key, this.moves[this.aiTurn])).generateHmac();
     }
 
     getResult(userTurn, aiTurn) {
@@ -59,12 +59,12 @@ class Game {
     }
 
     play() {
-        if (this.moves.length % 2 == 0) {
-            console.log('number of args must be odd');
+        if (this.moves.length < 2) {
+            console.log('number of args must be > 1');
             return;
         }
-        if (this.moves.length < 1) {
-            console.log('number of args must be > 1');
+        if (this.moves.length % 2 == 0) {
+            console.log('number of args must be odd');
             return;
         }
         if (this.moves.length != new Set(this.moves).size) {
